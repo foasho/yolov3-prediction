@@ -218,7 +218,6 @@ def imshow(cv2image):
     cv2.destroyAllWindows()
 
 def detectrun(pil_image):
-    K.clear_session()
     pil_image = resizePilImage(pil_image, 1200)
     yolo_data = YOLO()
     detectimagels, classnamels, drawimage, coordinate_ls = yolo_data.detect_image(pil_image)
@@ -227,9 +226,7 @@ def detectrun(pil_image):
 def testrun():
     import time
     start = time.time()
-    K.clear_session()
     pil_image = Image.open("./example/test.jpg")
-    yolo_data = YOLO()
     detectimagels, classnamels, drawimage, coordinate_ls = yolo_data.detect_image(pil_image)
     end_time = time.time() - start
     print(detectimagels)
@@ -241,6 +238,7 @@ def testrun():
     return drawcv2image
 
 
+yolo_data = YOLO()
 if len(sys.argv) >= 2:
     sys_param1 = str(sys.argv[1])
     if sys_param1 == "test":
